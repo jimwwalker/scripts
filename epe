@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ "$#" -eq 0 ]; then
+    ./ep-engine_ep_unit_tests
+fi
+
+if [ "$#" -ne 0 ]; then
+    ./ep-engine_ep_unit_tests --gtest_filter=$1 $2
+fi

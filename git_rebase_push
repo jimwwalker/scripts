@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ "$#" -ne 3 ]; then
+    echo "Usage git_rebase_push rebase-branch gerrit-target ref"
+    exit 1
+fi
+
+SHA=$(git rev-parse $3)
+git checkout $1
+git cherry-pick $SHA
+
+if [ $? -eq 0 ]; then
+    git push gerrit HEAD:$2
+    git checkout -
+else
+    echo "cherry-pick failed"
+    echo "Fix-up and run"
+    echo "git push gerrit HEAD:$2 && git checkout -"
+    exit 1
+fi
+
+exit 0
