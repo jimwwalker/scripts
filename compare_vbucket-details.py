@@ -72,7 +72,15 @@ for vb in active:
     for vbR in replica:
         if data['num_items'] != vbR['num_items']:
             # replication lag?
-            print("WARNING: {} num_items differ a:{} vs r:{} a:{}, r:{}".format(vb, data['num_items'], vbR['num_items'], data['node_name'], vbR['node_name']))
+            diff = int(data['num_items']) - int(vbR['num_items'])
+            print("WARNING: {} num_items differ {} a:{} vs r:{} a:{}, r:{}".format(vb, diff, data['num_items'], vbR['num_items'], data['node_name'], vbR['node_name']))
+        #if data['high_seqno'] != vbR['high_seqno']:
+        #    print("WARNING: {} high_seqno differ a:{} vs r:{} a:{}, r:{}".format(vb, diff, data['high_seqno'], vbR['high_seqno'], data['node_name'], vbR['node_name']))
+
+        #for k in ["ops_create", "ops_update", "high_prepared_seqno", "high_completed_seqno"]:
+        #    if data[k] != vbR[k]:
+        #        diff = int(data[k]) - int(vbR[k])
+        #        print("WARNING: {} {} differ {} a:{} vs r:{} a:{}, r:{}".format(vb, k, diff, data[k], vbR[k], data['node_name'], vbR['node_name']))
 
 
 
