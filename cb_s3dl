@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Check if the argument X is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <directory_name>"
+    exit 1
+fi
+
+# Read input from stdin
+read -e file_list
+
+# Change directory to /Users/jimwalker/Downloads/
+cd /Users/jimwalker/Downloads/ || exit 1
+
+# Create a directory using the argument X
+mkdir -p "CBSE-$1" || exit 1
+
+# Change directory to the created directory
+cd "CBSE-$1" || exit 1
+
+echo $file_list
+
+# Run a command with the input data as an argument
+s3dl $file_list
